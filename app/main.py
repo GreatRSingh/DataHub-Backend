@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.post("/login/")
 async def login(file_name: Annotated[str, Form()], file: Annotated[str, Form()]):
-    file_content=base64.b64decode(file)
-    with open("./storage/" + file_name,"w+") as f:
-        f.write(file_content.decode("utf-8"))
+    wav_file = open("./app/storage/" + str(file_name), "wb")
+    decode_string = base64.b64decode(str(file))
+    wav_file.write(decode_string)
     return {"username": file_name}
